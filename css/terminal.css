@@ -1,0 +1,129 @@
+/* ============================================================
+   DEAD SIMPLE TERMINAL
+   Pure #000000 black background, white text, blinking block cursor.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  color: #e0e0e0;
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+#terminal {
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  overflow-y: auto;
+  outline: none;
+}
+
+#terminal::-webkit-scrollbar { width: 6px; }
+#terminal::-webkit-scrollbar-track { background: #000000; }
+#terminal::-webkit-scrollbar-thumb { background: #222222; }
+
+#output {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Minimalist TUI Menu Navigation */
+.menu-container {
+  margin: 12px 0 20px 0;
+}
+
+.menu-item {
+  display: inline-block;
+  min-width: 240px;
+  padding: 2px 8px;
+  cursor: pointer;
+  color: #a0a0a0;
+  user-select: none;
+  border-radius: 0;
+  transition: none;
+}
+
+/* Classic CLI inverse selection highlight */
+.menu-item.selected,
+.menu-item:hover {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 700;
+}
+
+/* Text elements */
+.bold { font-weight: 700; color: #ffffff; }
+.dim { color: #666666; }
+.white { color: #ffffff; }
+
+/* Input line */
+#input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+#prompt {
+  color: #ffffff;
+  white-space: nowrap;
+  user-select: none;
+}
+
+#cmd-input {
+  background: transparent;
+  border: none;
+  color: transparent;
+  width: 1px;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+#typed-input {
+  color: #ffffff;
+  white-space: pre;
+}
+
+/* Solid white rectangle blinking indicator */
+#cursor {
+  color: #ffffff;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Simple image rendering when requested via command */
+.pixel-avatar {
+  width: 88px;
+  height: 88px;
+  image-rendering: pixelated;
+  border: 1px solid #333333;
+  margin: 12px 0;
+  display: block;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+a:hover {
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: none;
+}

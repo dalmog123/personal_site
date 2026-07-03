@@ -1,0 +1,126 @@
+/* ============================================================
+   DEAD SIMPLE GAMES CSS
+   Pure #000000 black background, white borders, stark minimalist UI.
+   ============================================================ */
+
+#game-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #000000;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  padding: 20px;
+}
+#game-overlay.active { display: flex; }
+
+#game-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ffffff;
+  background: #000000;
+  padding: 16px;
+  max-width: 100%;
+}
+
+#game-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+#game-quit-btn {
+  background: #000000;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+#game-quit-btn:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+#game-infobar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #aaaaaa;
+}
+
+.game-info-item {
+  display: flex;
+  gap: 8px;
+}
+.game-info-value { color: #ffffff; font-weight: bold; }
+
+#game-main-content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+#game-canvas {
+  border: 1px solid #444444;
+  background: #000000;
+  image-rendering: pixelated;
+  display: block;
+}
+
+#tetris-next {
+  border: 1px solid #444444;
+  background: #000000;
+}
+
+#game-footer {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #666666;
+  text-align: center;
+}
+
+/* Minesweeper grid */
+.mines-grid {
+  display: inline-grid;
+  gap: 2px;
+  border: 1px solid #444444;
+  padding: 8px;
+  background: #111111;
+}
+
+.mine-cell {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid #333333;
+  background: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+.mine-cell:hover:not(.revealed):not(.flagged) {
+  background: #333333;
+}
+.mine-cell.revealed {
+  background: #111111;
+  border-color: #222222;
+  cursor: default;
+}
+.mine-cell.flagged { color: #ffffff; }
+.mine-cell.mine-hit { background: #ffffff; color: #000000; }

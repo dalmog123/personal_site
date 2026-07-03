@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Almog Dror</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/terminal.css">
+  <link rel="stylesheet" href="css/games.css">
+</head>
+<body>
+  <div id="terminal">
+    <div id="output"></div>
+    <div id="input-line">
+      <span id="prompt">&gt; </span>
+      <span id="typed-input"></span><span id="cursor">█</span>
+      <input type="text" id="cmd-input" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </div>
+  </div>
+
+  <div id="game-overlay">
+    <div id="game-window">
+      <div id="game-titlebar"><span id="game-title-text"></span><button id="game-quit-btn">[q] quit</button></div>
+      <div id="game-infobar"></div>
+      <div id="game-main-content">
+        <canvas id="game-canvas"></canvas>
+        <canvas id="tetris-next" style="display:none;"></canvas>
+      </div>
+      <div id="game-footer"></div>
+    </div>
+  </div>
+
+  <script src="js/effects.js"></script>
+  <script src="js/commands.js"></script>
+  <script src="js/games/snake.js"></script>
+  <script src="js/games/tetris.js"></script>
+  <script src="js/games/minesweeper.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/terminal.js"></script>
+</body>
+</html>

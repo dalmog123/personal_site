@@ -1,0 +1,208 @@
+/* ============================================================
+   DALMOG OS - Animations & Effects
+   ============================================================ */
+
+/* ---- Keyframes ---- */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bootFadeIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--green); }
+  50%       { opacity: 0.5; box-shadow: 0 0 2px var(--green); }
+}
+
+@keyframes glitch {
+  0%   { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
+  5%   { clip-path: inset(20% 0 60% 0); transform: translate(3px, 0); }
+  10%  { clip-path: inset(60% 0 10% 0); transform: translate(-2px, 0); }
+  15%  { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+  100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+}
+
+@keyframes glitchShift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-2px, 1px); }
+  40%  { transform: translate(2px, -1px); }
+  60%  { transform: translate(-1px, 2px); }
+  80%  { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes scanline {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes pixelLoad {
+  0%   { opacity: 0; filter: blur(4px) brightness(2); transform: scale(1.05); }
+  50%  { opacity: 0.7; filter: blur(1px) brightness(1.3); transform: scale(1.02); }
+  100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); }
+}
+
+@keyframes tabGlow {
+  0%, 100% { box-shadow: 0 0 4px rgba(0,255,156,0.2); }
+  50%       { box-shadow: 0 0 12px rgba(0,255,156,0.5); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ---- Glitch text effect ---- */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--red);
+  animation: glitch 4s infinite;
+  clip-path: inset(0 0 0 0);
+}
+.glitch::after {
+  left: -2px;
+  text-shadow: 1px 0 var(--cyan);
+  animation: glitch 4s 0.3s infinite;
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---- Typing cursor ---- */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background: var(--green);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+  box-shadow: 0 0 6px var(--green);
+}
+
+/* ---- Typing animation wrapper ---- */
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--green);
+  animation: typing 0.8s steps(40, end), blink 0.8s step-end 0.8s infinite;
+}
+
+/* ---- Loading spinner ---- */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--green-dark);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ---- Pixel avatar animation ---- */
+.pixel-avatar {
+  animation: pixelLoad 0.6s ease forwards;
+}
+
+/* ---- Active tab glow ---- */
+.tab.active {
+  animation: tabGlow 2s ease-in-out infinite;
+}
+
+/* ---- Matrix rain single scan line ---- */
+.matrix-scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--green), transparent);
+  opacity: 0.3;
+  z-index: 9999;
+  pointer-events: none;
+  animation: scanline 6s linear infinite;
+}
+
+/* ---- Progress bar animation ---- */
+.skill-bar-fill {
+  animation: growBar 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes growBar {
+  from { width: 0 !important; }
+  to   { width: var(--target-width); }
+}
+
+/* ---- Section transitions ---- */
+.section-enter {
+  animation: fadeInUp 0.2s ease forwards;
+}
+
+/* ---- Hover glow on interactive elements ---- */
+.term-box,
+.project-card,
+.stat-item {
+  transition: all 0.2s ease;
+}
+
+/* ---- Scrolling text for status bar ---- */
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ---- Flash/highlight new output ---- */
+@keyframes flashHighlight {
+  0%   { background: rgba(0, 255, 156, 0.15); }
+  100% { background: transparent; }
+}
+.flash {
+  animation: flashHighlight 0.6s ease;
+}
+
+/* ---- CRT flicker (subtle, optional) ---- */
+body.crt-mode #terminal-window {
+  animation: crtFlicker 10s infinite;
+}
+
+@keyframes crtFlicker {
+  0%   { opacity: 1; }
+  98%  { opacity: 1; }
+  99%  { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+/* ---- ASCII art pre-formatted blocks ---- */
+.ascii-art {
+  color: var(--green);
+  font-size: 12px;
+  line-height: 1.2;
+  text-shadow: var(--glow-text);
+  white-space: pre;
+  display: block;
+}
