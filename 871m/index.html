@@ -33,7 +33,7 @@
     <header class="hero">
       <p class="eyebrow">Seminar Paper · U.S. International Taxation</p>
       <h1>Enforcing IRC&nbsp;§871(m) on Dividend Equivalents</h1>
-      <p class="hook">How the U.S. tried to tax synthetic dividends - and why, fifteen years and six deferrals later, the rules still can&rsquo;t be enforced.</p>
+      <p class="hook">How the U.S. tried to tax synthetic dividends - and why, sixteen years and six deferrals later, the rules still can&rsquo;t be enforced.</p>
       <p class="byline">Almog Dror</p>
       <p class="orient-note">You&rsquo;re holding the paper. This page is a 3-minute orientation before you begin - every underlined term is one tap away from a plain-English definition.</p>
     </header>
@@ -46,7 +46,7 @@
         Foreign investors used <span class="term" data-def="A contract where one side gets all the economic return of a stock - its price moves and its dividends - without ever owning the shares.">total-return swaps</span> to synthetically own U.S. stocks and dodge the 30% tax normally withheld on dividends. In 2010, Congress enacted <span class="term" data-def="The 2010 U.S. tax provision that treats a derivative&rsquo;s &lsquo;dividend-equivalent&rsquo; payments as if they were real U.S. dividends.">§871(m)</span> to tax these <span class="term" data-def="A payment on a derivative that mirrors a U.S. dividend. §871(m) recharacterizes it as taxable U.S.-source income.">dividend equivalents</span> as if they were the real thing. The regulation turns that goal into dense math - the <span class="term" data-def="Checks a derivative&rsquo;s delta (price sensitivity to the stock). A delta of 0.80 or higher means it&rsquo;s treated like owning the stock, and is taxed.">Delta&nbsp;Test</span> and the <span class="term" data-def="A variance-based test for complex, non-linear derivatives, comparing them against a hypothetical 0.80-delta contract.">Substantial&nbsp;Equivalence&nbsp;Test</span>.
       </p>
       <p>
-        The paper&rsquo;s thesis: the law is conceptually sound but <strong>operationally unenforceable</strong>. The market engineers instruments that sit just under the thresholds, and the <span class="term" data-def="The banks and brokers legally responsible for deducting the tax before paying the investor.">withholding agents</span> lack the data to comply - which is why the IRS has deferred full enforcement <strong>six times</strong>, now to 2027. It closes with an original fix: the <span class="term" data-def="The paper&rsquo;s proposed solution - graduated tax bands based on delta, instead of an all-or-nothing 0.80 cliff.">Tiered&nbsp;Withholding&nbsp;Simplification&nbsp;Model</span>.
+        The paper&rsquo;s thesis: the law is conceptually sound but <strong>operationally unenforceable</strong>. The market engineers instruments that sit just under the thresholds, and the <span class="term" data-def="The banks and brokers legally responsible for deducting the tax before paying the investor.">withholding agents</span> lack the data to comply - which is why the IRS has deferred full enforcement <strong>six times</strong>, now to 2027. It closes with an original fix: the <span class="term" data-def="The paper&rsquo;s proposed solution - graduated tax bands based on delta, measured on each dividend date, instead of an all-or-nothing day-one 0.80 cliff.">Tiered&nbsp;Withholding&nbsp;Simplification&nbsp;Model</span>.
       </p>
     </section>
 
@@ -78,7 +78,7 @@
         <li><span class="t-year">2010</span><span class="t-body"><span class="term" data-def="The Hiring Incentives to Restore Employment Act of 2010.">HIRE&nbsp;Act</span> enacts §871(m).</span></li>
         <li><span class="t-year">2015</span><span class="t-body">Final regulations (1.871-15) introduce the Delta and Substantial Equivalence tests.</span></li>
         <li><span class="t-year">2016</span><span class="t-body">Notice 2016-76 limits enforcement to <span class="term" data-def="A derivative that moves one-for-one with the stock (delta = 1.0) - the most stock-like, and the only type currently enforced.">delta-one</span> transactions from 2017.</span></li>
-        <li><span class="t-year">2017-22</span><span class="t-body">Notices 2017-42, 2018-5, 2018-72, 2020-2, 2022-37 push the horizon out, again and again.</span></li>
+        <li><span class="t-year">2017-22</span><span class="t-body">Notices 2017-42, 2018-72, 2020-2, 2022-37 push the horizon out, again and again.</span></li>
         <li><span class="t-year">2024</span><span class="t-body">Notice 2024-44 extends relief through 2026; non-delta-one and combination rules deferred to Jan&nbsp;1,&nbsp;2027.</span></li>
         <li class="t-cliff"><span class="t-year">2027</span><span class="t-body">The enforcement cliff - or a seventh deferral.</span></li>
       </ol>
@@ -120,12 +120,13 @@
         <div class="callout">
           <p class="callout-label">The proposed fix</p>
           <h3>The Tiered Withholding Simplification Model</h3>
-          <p>Replace the 0% / 30% cliff with graduated bands, and eliminate the combination rule for listed securities:</p>
+          <p>Replace the 0% / 30% cliff with graduated bands measured on each dividend record date (not just day one), and eliminate the combination rule for listed securities:</p>
           <div class="bands">
             <div class="band"><span class="band-delta">delta &lt; 0.40</span><span class="band-rate">0%</span></div>
-            <div class="band"><span class="band-delta">0.40 - 0.79</span><span class="band-rate">10%</span></div>
+            <div class="band"><span class="band-delta">0.40 - 0.79</span><span class="band-rate band-rate--formula">30% &times; delta</span></div>
             <div class="band"><span class="band-delta">delta &ge; 0.80</span><span class="band-rate">30%</span></div>
           </div>
+          <p class="callout-note">In the middle band the tax tracks what the position actually captures - an effective 12-24% of the dividend - so there is no cliff left to engineer around.</p>
           <p class="callout-kicker">&ldquo;A lower rate that&rsquo;s actually collected beats a 30% rate that isn&rsquo;t.&rdquo;</p>
         </div>
       </div>
