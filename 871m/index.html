@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRC §871(m) on Dividend Equivalents - A 3-minute overview | Almog Dror</title>
+  <meta name="description" content="A quick orientation to Almog Dror's seminar paper on enforcing IRC §871(m): how the U.S. tried to tax synthetic dividends, why the rules keep getting deferred, and the reform the paper proposes.">
+  <meta name="author" content="Almog Dror">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Social / link preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Enforcing IRC §871(m) on Dividend Equivalents">
+  <meta property="og:description" content="A 3-minute orientation before you read the paper: the loophole, the math, the decade of deferrals, and a proposed fix.">
+  <meta property="og:url" content="https://dalmog.com/871m">
+  <meta property="og:image" content="https://dalmog.com/871m/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Enforcing IRC §871(m) on Dividend Equivalents">
+  <meta name="twitter:description" content="A 3-minute orientation before you read the paper.">
+  <meta name="twitter:image" content="https://dalmog.com/871m/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="progress" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- (1) HERO -->
+    <header class="hero">
+      <p class="eyebrow">Seminar Paper · U.S. International Taxation</p>
+      <h1>Enforcing IRC&nbsp;§871(m) on Dividend Equivalents</h1>
+      <p class="hook">How the U.S. tried to tax synthetic dividends - and why, fifteen years and six deferrals later, the rules still can&rsquo;t be enforced.</p>
+      <p class="byline">Almog Dror</p>
+      <p class="orient-note">You&rsquo;re holding the paper. This page is a 3-minute orientation before you begin - every underlined term is one tap away from a plain-English definition.</p>
+    </header>
+
+    <!-- (2) TL;DR -->
+    <section aria-labelledby="tldr-h">
+      <p class="section-label">The paper in 30 seconds</p>
+      <h2 id="tldr-h">The short version</h2>
+      <p class="lead">
+        Foreign investors used <span class="term" data-def="A contract where one side gets all the economic return of a stock - its price moves and its dividends - without ever owning the shares.">total-return swaps</span> to synthetically own U.S. stocks and dodge the 30% tax normally withheld on dividends. In 2010, Congress enacted <span class="term" data-def="The 2010 U.S. tax provision that treats a derivative&rsquo;s &lsquo;dividend-equivalent&rsquo; payments as if they were real U.S. dividends.">§871(m)</span> to tax these <span class="term" data-def="A payment on a derivative that mirrors a U.S. dividend. §871(m) recharacterizes it as taxable U.S.-source income.">dividend equivalents</span> as if they were the real thing. The regulation turns that goal into dense math - the <span class="term" data-def="Checks a derivative&rsquo;s delta (price sensitivity to the stock). A delta of 0.80 or higher means it&rsquo;s treated like owning the stock, and is taxed.">Delta&nbsp;Test</span> and the <span class="term" data-def="A variance-based test for complex, non-linear derivatives, comparing them against a hypothetical 0.80-delta contract.">Substantial&nbsp;Equivalence&nbsp;Test</span>.
+      </p>
+      <p>
+        The paper&rsquo;s thesis: the law is conceptually sound but <strong>operationally unenforceable</strong>. The market engineers instruments that sit just under the thresholds, and the <span class="term" data-def="The banks and brokers legally responsible for deducting the tax before paying the investor.">withholding agents</span> lack the data to comply - which is why the IRS has deferred full enforcement <strong>six times</strong>, now to 2027. It closes with an original fix: the <span class="term" data-def="The paper&rsquo;s proposed solution - graduated tax bands based on delta, instead of an all-or-nothing 0.80 cliff.">Tiered&nbsp;Withholding&nbsp;Simplification&nbsp;Model</span>.
+      </p>
+    </section>
+
+    <!-- (3) WHY THIS EXISTS -->
+    <section aria-labelledby="why-h">
+      <p class="section-label">Why this exists</p>
+      <h2 id="why-h">The situation, in three moves</h2>
+      <div class="stack">
+        <div class="move">
+          <span class="move-tag">The loophole</span>
+          <p>Under the old sourcing rules, payments on a <span class="term" data-def="A category of derivative - such as an equity swap - whose payments are calculated on a notional amount rather than by owning the asset.">notional principal contract</span> were sourced to the <em>recipient&rsquo;s</em> residence. So dividend equivalents on a swap escaped the 30% tax entirely, turning taxable U.S. income into tax-free foreign-source gains.</p>
+        </div>
+        <div class="move">
+          <span class="move-tag">The mechanics</span>
+          <p>A foreign <span class="term" data-def="The investor who receives the derivative&rsquo;s upside and any dividend-equivalent payments.">Long&nbsp;Party</span> enters a total-return swap with a U.S. broker - the <span class="term" data-def="The bank or broker on the other side, who makes the payments and typically hedges by holding the actual shares.">Short&nbsp;Party</span> - who holds the physical shares. The dividend is paid domestic-to-domestic (untaxed), then its economic value is passed to the foreign investor through the swap. No withholding.</p>
+        </div>
+        <div class="move">
+          <span class="move-tag">The response</span>
+          <p>The <span class="term" data-def="The Hiring Incentives to Restore Employment Act of 2010, which enacted §871(m).">HIRE&nbsp;Act</span> of 2010 applied <span class="term" data-def="A tax doctrine: what a deal actually does economically matters more than how it is labeled.">substance over form</span> through §871(m), and <span class="term" data-def="The 2015 Treasury regulation that spells out, in detail, how §871(m) actually works.">Treas.&nbsp;Reg.&nbsp;1.871-15</span> (finalized 2015) operationalized it with the Delta and Substantial Equivalence tests.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- (4) TIMELINE -->
+    <section aria-labelledby="timeline-h">
+      <p class="section-label">A decade of deferrals</p>
+      <h2 id="timeline-h">Fifteen years, still not enforced</h2>
+      <ol class="timeline">
+        <li><span class="t-year">2010</span><span class="t-body"><span class="term" data-def="The Hiring Incentives to Restore Employment Act of 2010.">HIRE&nbsp;Act</span> enacts §871(m).</span></li>
+        <li><span class="t-year">2015</span><span class="t-body">Final regulations (1.871-15) introduce the Delta and Substantial Equivalence tests.</span></li>
+        <li><span class="t-year">2016</span><span class="t-body">Notice 2016-76 limits enforcement to <span class="term" data-def="A derivative that moves one-for-one with the stock (delta = 1.0) - the most stock-like, and the only type currently enforced.">delta-one</span> transactions from 2017.</span></li>
+        <li><span class="t-year">2017-22</span><span class="t-body">Notices 2017-42, 2018-5, 2018-72, 2020-2, 2022-37 push the horizon out, again and again.</span></li>
+        <li><span class="t-year">2024</span><span class="t-body">Notice 2024-44 extends relief through 2026; non-delta-one and combination rules deferred to Jan&nbsp;1,&nbsp;2027.</span></li>
+        <li class="t-cliff"><span class="t-year">2027</span><span class="t-body">The enforcement cliff - or a seventh deferral.</span></li>
+      </ol>
+    </section>
+
+    <!-- (5) KEY CONCEPTS -->
+    <section aria-labelledby="concepts-h">
+      <p class="section-label">Before you read</p>
+      <h2 id="concepts-h">Eight terms that unlock the paper</h2>
+      <div class="cards">
+        <div class="card"><h3>FDAP income</h3><p>Fixed, Determinable, Annual or Periodical U.S.-source income - taxed at a flat 30% for foreign investors. Dividends are the archetype.</p></div>
+        <div class="card"><h3>Dividend equivalent</h3><p>A synthetic payment on a derivative that references a U.S. dividend. §871(m) recharacterizes it as taxable U.S.-source income.</p></div>
+        <div class="card"><h3>Delta &amp; the Delta Test</h3><p>Delta is how much a derivative moves when the stock moves $1. A delta of 0.80+ makes it &ldquo;specified&rdquo; and taxable - but it&rsquo;s tested only on day one.</p></div>
+        <div class="card"><h3>Substantial Equivalence Test</h3><p>For complex, non-linear contracts: a variance-based comparison against a hypothetical 0.80-delta benchmark.</p></div>
+        <div class="card"><h3>Combination Rule</h3><p>Aggregates separate trades entered &ldquo;in connection with&rdquo; each other, so an investor can&rsquo;t split one exposure into sub-threshold pieces.</p></div>
+        <div class="card"><h3>QDD</h3><p>Qualified Derivatives Dealer - a status letting a firm net its positions and absorb withholding, so tax doesn&rsquo;t cascade through a chain of trades.</p></div>
+        <div class="card"><h3>Qualified Index</h3><p>A safe harbor: derivatives on broad, diversified indexes are exempt if the index passes a strict seven-part test.</p></div>
+        <div class="card"><h3>Cashless withholding</h3><p>Tax owed on a &ldquo;deemed&rdquo; dividend when no cash actually changes hands - collected by debiting the client&rsquo;s collateral or margin.</p></div>
+      </div>
+    </section>
+
+    <!-- (6) CORE ARGUMENT -->
+    <section aria-labelledby="argument-h">
+      <p class="section-label">The core argument</p>
+      <h2 id="argument-h">What the paper actually claims</h2>
+      <div class="stack">
+        <div class="claim">
+          <h3>The revenue is a rounding error</h3>
+          <p>A proposed expansion was scored by the <span class="term" data-def="Joint Committee on Taxation - Congress&rsquo;s nonpartisan tax scorekeeper.">JCT</span> at just ~$90M over ten years, and Treasury has never published regime-wide collections - against a systemic, recurring compliance cost borne by every intermediary.</p>
+        </div>
+        <div class="claim">
+          <h3>The precision is an illusion</h3>
+          <p>A bright-line 0.80 threshold, tested only on day one, invites a purpose-built &ldquo;0.79 delta&rdquo; instrument. The deepest avoidance needs no dishonest inputs at all - it&rsquo;s designed into the contract itself.</p>
+        </div>
+        <div class="claim">
+          <h3>It can&rsquo;t be policed</h3>
+          <p>The <span class="term" data-def="Aggregates separate trades entered &lsquo;in connection with&rsquo; each other so investors can&rsquo;t split one exposure into sub-threshold pieces.">Combination Rule</span> presupposes cross-custodial portfolio visibility that clearing brokers in anonymous, exchange-traded markets simply do not have.</p>
+        </div>
+        <div class="callout">
+          <p class="callout-label">The proposed fix</p>
+          <h3>The Tiered Withholding Simplification Model</h3>
+          <p>Replace the 0% / 30% cliff with graduated bands, and eliminate the combination rule for listed securities:</p>
+          <div class="bands">
+            <div class="band"><span class="band-delta">delta &lt; 0.40</span><span class="band-rate">0%</span></div>
+            <div class="band"><span class="band-delta">0.40 - 0.79</span><span class="band-rate">10%</span></div>
+            <div class="band"><span class="band-delta">delta &ge; 0.80</span><span class="band-rate">30%</span></div>
+          </div>
+          <p class="callout-kicker">&ldquo;A lower rate that&rsquo;s actually collected beats a 30% rate that isn&rsquo;t.&rdquo;</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- (7) CHAPTER MAP -->
+    <section aria-labelledby="map-h">
+      <p class="section-label">What&rsquo;s inside</p>
+      <h2 id="map-h">The five chapters</h2>
+      <ol class="chapters">
+        <li><span class="ch-num">1</span><span class="ch-body"><strong>The Pre-871(m) Landscape &amp; the FDAP Conflict</strong><br>How the loophole worked, and why it existed.</span></li>
+        <li><span class="ch-num">2</span><span class="ch-body"><strong>The Regulatory Framework (Treas. Reg. 1.871-15)</strong><br>The Delta and Substantial Equivalence tests, with the worked &ldquo;Fiona&rdquo; and &ldquo;Ivy&rdquo; examples.</span></li>
+        <li><span class="ch-num">3</span><span class="ch-body"><strong>The Operational Nightmare &amp; Repeated Deferrals</strong><br>Infrastructure, the combination rule, and Notice 2024-44.</span></li>
+        <li><span class="ch-num">4</span><span class="ch-body"><strong>Safe Harbors &amp; Market Solutions</strong><br>The Qualified Index, the QDD regime, and the <span class="term" data-def="Depository Trust &amp; Clearing Corporation - the core post-trade plumbing for U.S. securities; it built a utility to standardize 871(m) data.">DTCC</span> data utility.</span></li>
+        <li><span class="ch-num">5</span><span class="ch-body"><strong>Critical Analysis &amp; Reform</strong><br>Cost-benefit, the illusion of precision, the <span class="term" data-def="Financial Transaction Tax - a tiny levy on every trade, floated as a simpler alternative.">FTT</span> alternative, and the Tiered Model with its stress-test.</span></li>
+      </ol>
+    </section>
+
+    <!-- (8) SOURCES -->
+    <section aria-labelledby="sources-h">
+      <p class="section-label">Key sources</p>
+      <h2 id="sources-h">Where to look first</h2>
+      <p class="sources-intro">A handful of the most authoritative sources. The full bibliography (~60 sources) lives in the paper itself.</p>
+      <div class="source-group">
+        <h3>Primary law</h3>
+        <ul>
+          <li><a href="https://www.ecfr.gov/current/title-26/chapter-I/subchapter-A/part-1/subject-group-ECFR13be67b7d68fc09/section-1.871-15" target="_blank" rel="noopener">26 CFR §1.871-15 - Treatment of dividend equivalents (eCFR)</a></li>
+          <li><a href="https://www.irs.gov/pub/irs-drop/n-24-44.pdf" target="_blank" rel="noopener">IRS Notice 2024-44 - latest phase-in extension</a></li>
+          <li><a href="https://www.federalregister.gov/documents/2015/09/18/2015-21759/dividend-equivalents-from-sources-within-the-united-states" target="_blank" rel="noopener">Federal Register 2015 - final regulations</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h3>Industry &amp; market</h3>
+        <ul>
+          <li><a href="https://www.dtcc.com/asset-services/global-tax-services/871m-announcements" target="_blank" rel="noopener">DTCC - 871(m) Announcements service</a></li>
+          <li><a href="https://www.msci.com/downloads/web/msci-com/indexes/index-resources/additional-regulations/IRS-871M.pdf" target="_blank" rel="noopener">MSCI - Qualified Index policy</a></li>
+          <li><a href="https://www.spglobal.com/spdji/en/documents/additional-material/sp-section-871m-index-information-equity-indices.pdf" target="_blank" rel="noopener">S&amp;P Dow Jones - 871(m) index information</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h3>Analysis &amp; academia</h3>
+        <ul>
+          <li><a href="https://www.sullcrom.com/SullivanCromwell/_Assets/PDFs/General/Publication-Hochberg-The-Tax-Lawyer-2018.pdf" target="_blank" rel="noopener">Sullivan &amp; Cromwell - The 871(m) Qualified Index Rules</a></li>
+          <li><a href="https://www.gtlaw.com/-/media/files/insights/published-articles/024204_journal-of-taxation-of-financial-products-john-kaufmann.pdf" target="_blank" rel="noopener">Greenberg Traurig - The Substantial Equivalence Test</a></li>
+          <li><a href="https://www.urban.org/sites/default/files/publication/78181/2000634-financial-transaction-taxes-in-theory-and-practice.pdf" target="_blank" rel="noopener">Urban-Brookings - Financial Transaction Taxes in Theory and Practice</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- (9) FOOTER -->
+    <footer>
+      <p class="footer-cta">Enjoy the read&nbsp;&nbsp;:-)</p>
+      <p class="footer-links">
+        <a href="https://dalmog.com" target="_blank" rel="noopener">dalmog.com</a>
+        <span class="sep">·</span>
+        <a href="https://www.linkedin.com/in/almogdror/" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="sep">·</span>
+        <a href="mailto:dalmog123@gmail.com">Email</a>
+      </p>
+      <p class="footer-fine">Overview of the seminar paper &ldquo;Enforcing IRC §871(m) on Dividend Equivalents&rdquo; by Almog Dror.</p>
+    </footer>
+
+  </main>
+
+  <!-- Tooltip popover element (single, reused) -->
+  <div id="tip" role="tooltip" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
