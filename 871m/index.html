@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRC §871(m) on Dividend Equivalents - A 3-minute overview | Almog Dror</title>
+  <meta name="description" content="A quick orientation to Almog Dror's seminar paper on enforcing IRC §871(m): how the U.S. tried to tax synthetic dividends, why the rules keep getting deferred, and the reform the paper proposes.">
+  <meta name="author" content="Almog Dror">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Social / link preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Enforcing IRC §871(m) on Dividend Equivalents">
+  <meta property="og:description" content="A 3-minute orientation before you read the paper: the loophole, the math, the decade of deferrals, and a proposed fix.">
+  <meta property="og:url" content="https://dalmog.com/871m_v2">
+  <meta property="og:image" content="https://dalmog.com/871m_v2/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Enforcing IRC §871(m) on Dividend Equivalents">
+  <meta name="twitter:description" content="A 3-minute orientation before you read the paper.">
+  <meta name="twitter:image" content="https://dalmog.com/871m_v2/og-image.png">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='12'%20fill='%230A0E15'/%3E%3Ctext%20x='32'%20y='46'%20font-family='Georgia,serif'%20font-size='40'%20fill='%23D9A75E'%20text-anchor='middle'%3E%C2%A7%3C/text%3E%3C/svg%3E">
+
+  <script>try{if(localStorage.getItem('871m-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark')}}catch(e){}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260710c">
+  <noscript>
+    <style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .model-chart, .model-panel, .model-controls, .model-verdict, .model-legend { display: none !important; }
+      .timeline::before { transform: none !important; }
+      .tl-stamp { opacity: 1 !important; }
+    </style>
+  </noscript>
+</head>
+<body>
+
+  <div id="progress" aria-hidden="true"></div>
+
+  <button id="theme-toggle" type="button" aria-label="Switch to dark theme">
+    <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+  </button>
+
+  <nav class="rail" aria-label="Sections">
+    <a href="#tldr"><span class="rail-num">01</span><span class="rail-label">The short version</span></a>
+    <a href="#loophole"><span class="rail-num">02</span><span class="rail-label">The loophole</span></a>
+    <a href="#deferrals"><span class="rail-num">03</span><span class="rail-label">A decade of deferrals</span></a>
+    <a href="#concepts"><span class="rail-num">04</span><span class="rail-label">Eight terms</span></a>
+    <a href="#argument"><span class="rail-num">05</span><span class="rail-label">The core argument</span></a>
+    <a href="#fix"><span class="rail-num">06</span><span class="rail-label">The proposed fix</span></a>
+    <a href="#chapters"><span class="rail-num">07</span><span class="rail-label">The five chapters</span></a>
+    <a href="#sources"><span class="rail-num">08</span><span class="rail-label">Key sources</span></a>
+  </nav>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero" id="top">
+    <div class="hero-frame" aria-hidden="true">
+      <span>dalmog.com / 871m</span>
+      <span>Almog Dror</span>
+    </div>
+
+    <div class="hero-inner">
+      <p class="eyebrow"><span class="eyebrow-mark">§</span>Seminar paper · U.S. international taxation</p>
+      <h1>Enforcing <span class="h1-accent">IRC&nbsp;§871(m)</span> on Dividend&nbsp;Equivalents</h1>
+      <p class="hook">How the U.S. tried to tax synthetic dividends - and why, sixteen years and six deferrals later, the rules still can&rsquo;t be enforced.</p>
+      <p class="orient">You&rsquo;re holding the paper. This page is a 3-minute orientation before you begin - every <span class="term" data-def="Exactly like this. Tap or hover any dotted term for a plain-English definition.">dotted term</span> opens a plain-English definition.</p>
+
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat"><span class="stat-num" data-count="2010" data-from="1984">2010</span><span class="stat-label">enacted</span></div>
+        <div class="stat"><span class="stat-num" data-count="6">6</span><span class="stat-label">deferrals</span></div>
+        <div class="stat"><span class="stat-num" data-count="0.80" data-decimals="2">0.80</span><span class="stat-label">the delta cliff</span></div>
+        <div class="stat"><span class="stat-num" data-count="2027" data-from="2001">2027</span><span class="stat-label">next deadline</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================ 01 TL;DR ============================ -->
+    <section class="sec reveal" id="tldr" aria-labelledby="tldr-h">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-label">The paper in 30 seconds</span>      </div>
+      <h2 id="tldr-h">The short version</h2>
+      <p class="lead">
+        Foreign investors used <span class="term" data-def="A contract where one side gets all the economic return of a stock - its price moves and its dividends - without ever owning the shares.">total-return swaps</span> to synthetically own U.S. stocks and dodge the 30% tax normally withheld on dividends. In 2010, Congress enacted <span class="term" data-def="The 2010 U.S. tax provision that treats a derivative's 'dividend-equivalent' payments as if they were real U.S. dividends.">§871(m)</span> to tax these <span class="term" data-def="A payment on a derivative that mirrors a U.S. dividend. §871(m) recharacterizes it as taxable U.S.-source income.">dividend equivalents</span> as if they were the real thing. The regulation turns that goal into dense math - the <span class="term" data-def="Checks a derivative's delta (price sensitivity to the stock). A delta of 0.80 or higher means it's treated like owning the stock, and is taxed.">Delta&nbsp;Test</span> and the <span class="term" data-def="A variance-based test for complex, non-linear derivatives, comparing them against a hypothetical 0.80-delta contract.">Substantial&nbsp;Equivalence&nbsp;Test</span>.
+      </p>
+      <p>
+        The paper&rsquo;s thesis: the law is conceptually sound but <strong>operationally unenforceable</strong>. The market engineers instruments that sit just under the thresholds, and the <span class="term" data-def="The banks and brokers legally responsible for deducting the tax before paying the investor.">withholding agents</span> lack the data to comply - which is why the IRS has deferred full enforcement <strong>six times</strong>, now to 2027. It closes with an original fix: the <span class="term" data-def="The paper's proposed solution - graduated tax bands based on delta, instead of an all-or-nothing 0.80 cliff.">Tiered&nbsp;Withholding&nbsp;Simplification&nbsp;Model</span>.
+      </p>
+    </section>
+
+    <!-- ============================ 02 LOOPHOLE ============================ -->
+    <section class="sec reveal" id="loophole" aria-labelledby="loophole-h">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <span class="sec-label">Why this exists</span>      </div>
+      <h2 id="loophole-h">The situation, in three moves</h2>
+
+      <div class="moves stagger">
+        <div class="move">
+          <span class="move-tag">01 · The loophole</span>
+          <p>Under the old sourcing rules, payments on a <span class="term" data-def="A category of derivative - such as an equity swap - whose payments are calculated on a notional amount rather than by owning the asset.">notional principal contract</span> were sourced to the <em>recipient&rsquo;s</em> residence. So dividend equivalents on a swap escaped the 30% tax entirely, turning taxable U.S. income into tax-free foreign-source gains.</p>
+        </div>
+        <div class="move">
+          <span class="move-tag">02 · The mechanics</span>
+          <p>A foreign <span class="term" data-def="The investor who receives the derivative's upside and any dividend-equivalent payments.">Long&nbsp;Party</span> enters a total-return swap with a U.S. broker - the <span class="term" data-def="The bank or broker on the other side, who makes the payments and typically hedges by holding the actual shares.">Short&nbsp;Party</span> - who holds the physical shares. The dividend is paid domestic-to-domestic, then its economic value is passed to the foreign investor through the swap. No withholding.</p>
+        </div>
+        <div class="move">
+          <span class="move-tag">03 · The response</span>
+          <p>The <span class="term" data-def="The Hiring Incentives to Restore Employment Act of 2010, which enacted §871(m).">HIRE&nbsp;Act</span> of 2010 applied <span class="term" data-def="A tax doctrine: what a deal actually does economically matters more than how it is labeled.">substance over form</span> through §871(m), and <span class="term" data-def="The 2015 Treasury regulation that spells out, in detail, how §871(m) actually works.">Treas.&nbsp;Reg.&nbsp;1.871-15</span> (finalized 2015) operationalized it with the Delta and Substantial Equivalence tests.</p>
+        </div>
+      </div>
+
+      <figure class="swap reveal" id="swap" aria-label="Diagram: the dividend travels from a U.S. corporation to a U.S. broker, then on to the foreign investor through a swap, avoiding the direct route where 30% would be withheld.">
+        <figcaption class="swap-cap"><span class="mono-tag">fig. 01</span> the route, traced</figcaption>
+        <div class="swap-route">
+          <div class="swap-node">
+            <span class="sn-tag">U.S. corporation</span>
+            <span class="sn-name">Pays the dividend</span>
+            <span class="sn-sub">a real, U.S.-source dividend</span>
+          </div>
+          <div class="swap-flow" aria-hidden="true">
+            <span class="sf-label">dividend<br>domestic · untaxed</span>
+          </div>
+          <div class="swap-node">
+            <span class="sn-tag">Short Party</span>
+            <span class="sn-name">U.S. broker</span>
+            <span class="sn-sub">hedges by holding the actual shares</span>
+          </div>
+          <div class="swap-flow" aria-hidden="true">
+            <span class="sf-label">dividend equivalent<br>paid through the swap</span>
+          </div>
+          <div class="swap-node">
+            <span class="sn-tag">Long Party</span>
+            <span class="sn-name">Foreign investor</span>
+            <span class="sn-sub">all the economics, none of the shares</span>
+          </div>
+        </div>
+        <div class="swap-blocked">
+          <span class="sb-chip"><span class="sb-x">✕</span> the avoided route: a direct dividend to the foreign investor, minus <strong>30% withholding</strong></span>
+        </div>
+      </figure>
+    </section>
+
+    <!-- ============================ 03 TIMELINE ============================ -->
+    <section class="sec" id="deferrals" aria-labelledby="deferrals-h">
+      <div class="sec-head reveal">
+        <span class="sec-num">03</span>
+        <span class="sec-label">A decade of deferrals</span>      </div>
+      <h2 class="reveal" id="deferrals-h">Sixteen years, still not enforced</h2>
+
+      <ol class="timeline" id="timeline">
+        <li class="tl-item reveal">
+          <span class="tl-year">2010</span>
+          <span class="tl-body"><span class="term" data-def="The Hiring Incentives to Restore Employment Act of 2010.">HIRE&nbsp;Act</span> enacts §871(m).</span>
+          <span class="tl-stamp tl-stamp--gold">Enacted</span>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-year">2015</span>
+          <span class="tl-body">Final regulations (1.871-15) introduce the Delta and Substantial Equivalence tests.</span>
+          <span class="tl-stamp tl-stamp--gold">Final regs</span>
+        </li>
+        <li class="tl-item tl-defer reveal">
+          <span class="tl-year">2016</span>
+          <span class="tl-body">Notice 2016-76 limits enforcement to <span class="term" data-def="A derivative that moves one-for-one with the stock (delta = 1.0) - the most stock-like, and the only type currently enforced.">delta-one</span> transactions from 2017.</span>
+          <span class="tl-stamp">Deferred · 01</span>
+        </li>
+        <li class="tl-item tl-defer reveal">
+          <span class="tl-year">2017-22</span>
+          <span class="tl-body">Notices 2017-42, 2018-72, 2020-2, 2022-37 push the horizon out, again and again.</span>
+          <span class="tl-stamp">Deferred · 02-05</span>
+        </li>
+        <li class="tl-item tl-defer reveal">
+          <span class="tl-year">2024</span>
+          <span class="tl-body">Notice 2024-44 extends relief through 2026; non-delta-one and combination rules deferred to Jan&nbsp;1,&nbsp;2027.</span>
+          <span class="tl-stamp">Deferred · 06</span>
+        </li>
+        <li class="tl-item tl-cliff reveal">
+          <span class="tl-year">2027</span>
+          <span class="tl-body">The enforcement cliff - or a seventh deferral.</span>
+          <span class="tl-stamp tl-stamp--cliff">Pending</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============================ 04 CONCEPTS ============================ -->
+    <section class="sec" id="concepts" aria-labelledby="concepts-h">
+      <div class="sec-head reveal">
+        <span class="sec-num">04</span>
+        <span class="sec-label">Before you read</span>      </div>
+      <h2 class="reveal" id="concepts-h">Eight terms that unlock the paper</h2>
+
+      <div class="cards stagger">
+        <div class="card"><span class="card-idx">01</span><h3>FDAP income</h3><p>Fixed, Determinable, Annual or Periodical U.S.-source income - taxed at a flat 30% for foreign investors. Dividends are the archetype.</p></div>
+        <div class="card"><span class="card-idx">02</span><h3>Dividend equivalent</h3><p>A synthetic payment on a derivative that references a U.S. dividend. §871(m) recharacterizes it as taxable U.S.-source income.</p></div>
+        <div class="card"><span class="card-idx">03</span><h3>Delta &amp; the Delta Test</h3><p>Delta is how much a derivative moves when the stock moves $1. A delta of 0.80+ makes it &ldquo;specified&rdquo; and taxable - but it&rsquo;s tested only on day one.</p></div>
+        <div class="card"><span class="card-idx">04</span><h3>Substantial Equivalence Test</h3><p>For complex, non-linear contracts: a variance-based comparison against a hypothetical 0.80-delta benchmark.</p></div>
+        <div class="card"><span class="card-idx">05</span><h3>Combination Rule</h3><p>Aggregates separate trades entered &ldquo;in connection with&rdquo; each other, so an investor can&rsquo;t split one exposure into sub-threshold pieces.</p></div>
+        <div class="card"><span class="card-idx">06</span><h3>QDD</h3><p>Qualified Derivatives Dealer - a status letting a firm net its positions and absorb withholding, so tax doesn&rsquo;t cascade through a chain of trades.</p></div>
+        <div class="card"><span class="card-idx">07</span><h3>Qualified Index</h3><p>A safe harbor: derivatives on broad, diversified indexes are exempt if the index passes a strict seven-part test.</p></div>
+        <div class="card"><span class="card-idx">08</span><h3>Cashless withholding</h3><p>Tax owed on a &ldquo;deemed&rdquo; dividend when no cash actually changes hands - collected by debiting the client&rsquo;s collateral or margin.</p></div>
+      </div>
+    </section>
+
+    <!-- ============================ 05 ARGUMENT ============================ -->
+    <section class="sec" id="argument" aria-labelledby="argument-h">
+      <div class="sec-head reveal">
+        <span class="sec-num">05</span>
+        <span class="sec-label">The core argument</span>      </div>
+      <h2 class="reveal" id="argument-h">What the paper actually claims</h2>
+
+      <div class="claims stagger">
+        <div class="claim">
+          <span class="claim-idx">Claim 01</span>
+          <div class="claim-body">
+            <h3>The revenue is a rounding error</h3>
+            <p>A proposed expansion was scored by the <span class="term" data-def="Joint Committee on Taxation - Congress's nonpartisan tax scorekeeper.">JCT</span> at just ~$90M over ten years, and Treasury has never published regime-wide collections - against a systemic, recurring compliance cost borne by every intermediary.</p>
+          </div>
+        </div>
+        <div class="claim">
+          <span class="claim-idx">Claim 02</span>
+          <div class="claim-body">
+            <h3>The precision is an illusion</h3>
+            <p>A bright-line 0.80 threshold, tested only on day one, invites a purpose-built &ldquo;0.79 delta&rdquo; instrument. The deepest avoidance needs no dishonest inputs at all - it&rsquo;s designed into the contract itself.</p>
+          </div>
+        </div>
+        <div class="claim">
+          <span class="claim-idx">Claim 03</span>
+          <div class="claim-body">
+            <h3>It can&rsquo;t be policed</h3>
+            <p>The <span class="term" data-def="Aggregates separate trades entered 'in connection with' each other so investors can't split one exposure into sub-threshold pieces.">Combination Rule</span> presupposes cross-custodial portfolio visibility that clearing brokers in anonymous, exchange-traded markets simply do not have.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 06 THE FIX ============================ -->
+    <section class="sec" id="fix" aria-labelledby="fix-h">
+      <div class="sec-head reveal">
+        <span class="sec-num">06</span>
+        <span class="sec-label">The proposed fix</span>      </div>
+      <h2 class="reveal" id="fix-h">The Tiered Withholding Simplification Model</h2>
+      <p class="reveal">Replace the all-or-nothing 0.80 cliff with graduated bands - a gated exemption, a linear middle band, a steeper climb to the full 30% on top - and drop the combination rule for listed securities. Below, you&rsquo;re the one structuring the trade: <strong>drag delta</strong> and watch what each regime collects.</p>
+
+      <div class="model reveal" id="model">
+        <div class="model-head">
+          <span class="mono-tag mono-tag--gold">fig. 02 · interactive</span>
+          <div class="model-legend" aria-hidden="true">
+            <span class="lg lg--law"><i></i>current law</span>
+            <span class="lg lg--tier"><i></i>tiered model</span>
+          </div>
+        </div>
+
+        <div class="model-grid">
+          <div class="model-chart" id="model-chart" aria-hidden="true"></div>
+
+          <div class="model-panel">
+            <div class="readout readout--delta">
+              <span class="ro-label">delta</span>
+              <span class="ro-value"><span aria-hidden="true">Δ&nbsp;</span><span id="ro-delta">0.79</span></span>
+              <span class="ro-sub">price sensitivity to the stock</span>
+            </div>
+            <div class="readout readout--law">
+              <span class="ro-label">current law withholds</span>
+              <span class="ro-value" id="ro-law">0%</span>
+              <span class="ro-sub" id="ro-law-sub">tested once, on day one</span>
+            </div>
+            <div class="readout readout--tier">
+              <span class="ro-label">tiered model withholds</span>
+              <span class="ro-value" id="ro-tier">23.7%</span>
+              <span class="ro-sub">linear in the middle band</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="model-controls">
+          <label class="slider-label" for="delta-slider">Structure the instrument yourself: drag the line on the chart, or the slider below.</label>
+          <input type="range" id="delta-slider" min="0" max="100" step="1" value="79" aria-label="Delta of the derivative, from 0.00 to 1.00">
+          <div class="model-presets" role="group" aria-label="Example instruments">
+            <button type="button" data-delta="25">Δ 0.25 · light option</button>
+            <button type="button" data-delta="79" class="active">Δ 0.79 · the engineered swap</button>
+            <button type="button" data-delta="80">Δ 0.80 · the cliff</button>
+            <button type="button" data-delta="100">Δ 1.00 · delta-one</button>
+          </div>
+        </div>
+
+        <p class="model-verdict" id="model-verdict" aria-live="polite"></p>
+
+        <div class="bands" aria-label="The three bands of the tiered model">
+          <div class="band"><span class="band-delta">Δ &lt; 0.40</span><span class="band-rate">0% · gated</span></div>
+          <div class="band"><span class="band-delta">0.40 to &lt;0.80</span><span class="band-rate">30% × Δ</span></div>
+          <div class="band"><span class="band-delta">Δ ≥ 0.80</span><span class="band-rate">24% → 30%</span></div>
+        </div>
+      </div>
+
+      <p class="kicker reveal">&ldquo;A lower rate that&rsquo;s actually collected beats a 30% rate that isn&rsquo;t.&rdquo;</p>
+    </section>
+
+    <!-- ============================ 07 CHAPTERS ============================ -->
+    <section class="sec" id="chapters" aria-labelledby="chapters-h">
+      <div class="sec-head reveal">
+        <span class="sec-num">07</span>
+        <span class="sec-label">What&rsquo;s inside</span>      </div>
+      <h2 class="reveal" id="chapters-h">The five chapters</h2>
+
+      <ol class="chapters stagger">
+        <li>
+          <span class="ch-num">1</span>
+          <span class="ch-body"><strong>The Pre-871(m) Landscape &amp; the FDAP Conflict</strong>How the loophole worked, and why it existed.</span>
+        </li>
+        <li>
+          <span class="ch-num">2</span>
+          <span class="ch-body"><strong>The Regulatory Framework (Treas. Reg. 1.871-15)</strong>The Delta and Substantial Equivalence tests, with the worked &ldquo;Fiona&rdquo; and &ldquo;Ivy&rdquo; examples.</span>
+        </li>
+        <li>
+          <span class="ch-num">3</span>
+          <span class="ch-body"><strong>The Operational Nightmare &amp; Repeated Deferrals</strong>Infrastructure, the combination rule, and Notice 2024-44.</span>
+        </li>
+        <li>
+          <span class="ch-num">4</span>
+          <span class="ch-body"><strong>Safe Harbors &amp; Market Solutions</strong>The Qualified Index, the QDD regime, and the <span class="term" data-def="Depository Trust &amp; Clearing Corporation - the core post-trade plumbing for U.S. securities; it built a utility to standardize 871(m) data.">DTCC</span> data utility.</span>
+        </li>
+        <li>
+          <span class="ch-num">5</span>
+          <span class="ch-body"><strong>Critical Analysis &amp; Reform</strong>Cost-benefit, the illusion of precision, the <span class="term" data-def="Financial Transaction Tax - a tiny levy on every trade, floated as a simpler alternative.">FTT</span> alternative, and the Tiered Model with its stress-test.</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============================ 08 SOURCES ============================ -->
+    <section class="sec" id="sources" aria-labelledby="sources-h">
+      <div class="sec-head reveal">
+        <span class="sec-num">08</span>
+        <span class="sec-label">Key sources</span>      </div>
+      <h2 class="reveal" id="sources-h">Where to look first</h2>
+      <p class="sources-intro reveal">A handful of the most authoritative sources. The full bibliography (~60 sources) lives in the paper itself.</p>
+
+      <div class="source-grid stagger">
+        <div class="source-group">
+          <h3>Primary law</h3>
+          <ul>
+            <li><a href="https://www.ecfr.gov/current/title-26/chapter-I/subchapter-A/part-1/subject-group-ECFR13be67b7d68fc09/section-1.871-15" target="_blank" rel="noopener">26 CFR §1.871-15 - Treatment of dividend equivalents (eCFR)</a></li>
+            <li><a href="https://www.irs.gov/pub/irs-drop/n-24-44.pdf" target="_blank" rel="noopener">IRS Notice 2024-44 - latest phase-in extension</a></li>
+            <li><a href="https://www.federalregister.gov/documents/2015/09/18/2015-21759/dividend-equivalents-from-sources-within-the-united-states" target="_blank" rel="noopener">Federal Register 2015 - final regulations</a></li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h3>Industry &amp; market</h3>
+          <ul>
+            <li><a href="https://www.dtcc.com/asset-services/global-tax-services/871m-announcements" target="_blank" rel="noopener">DTCC - 871(m) Announcements service</a></li>
+            <li><a href="https://www.msci.com/downloads/web/msci-com/indexes/index-resources/additional-regulations/IRS-871M.pdf" target="_blank" rel="noopener">MSCI - Qualified Index policy</a></li>
+            <li><a href="https://www.spglobal.com/spdji/en/documents/additional-material/sp-section-871m-index-information-equity-indices.pdf" target="_blank" rel="noopener">S&amp;P Dow Jones - 871(m) index information</a></li>
+          </ul>
+        </div>
+        <div class="source-group">
+          <h3>Analysis &amp; academia</h3>
+          <ul>
+            <li><a href="https://www.sullcrom.com/SullivanCromwell/_Assets/PDFs/General/Publication-Hochberg-The-Tax-Lawyer-2018.pdf" target="_blank" rel="noopener">Sullivan &amp; Cromwell - The 871(m) Qualified Index Rules</a></li>
+            <li><a href="https://www.gtlaw.com/-/media/files/insights/published-articles/024204_journal-of-taxation-of-financial-products-john-kaufmann.pdf" target="_blank" rel="noopener">Greenberg Traurig - The Substantial Equivalence Test</a></li>
+            <li><a href="https://www.urban.org/sites/default/files/publication/78181/2000634-financial-transaction-taxes-in-theory-and-practice.pdf" target="_blank" rel="noopener">Urban-Brookings - Financial Transaction Taxes in Theory and Practice</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="reveal">
+      <p class="footer-mark" aria-hidden="true">§</p>
+      <p class="footer-cta">Enjoy the read&nbsp;&nbsp;:-)</p>
+      <p class="footer-links">
+        <a href="https://dalmog.com" target="_blank" rel="noopener">dalmog.com</a>
+        <span class="sep">·</span>
+        <a href="https://www.linkedin.com/in/almogdror/" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="sep">·</span>
+        <a href="mailto:dalmog123@gmail.com">Email</a>
+      </p>
+      <p class="footer-fine">Overview of the seminar paper &ldquo;Enforcing IRC §871(m) on Dividend Equivalents&rdquo; by Almog Dror.</p>
+    </footer>
+
+  </main>
+
+  <!-- Tooltip popover element (single, reused) -->
+  <div id="tip" role="tooltip" aria-hidden="true"></div>
+
+  <script src="script.js?v=20260710e"></script>
+</body>
+</html>
